@@ -12,5 +12,7 @@ angular.module('ReykjavikHarbour').config(['$routeProvider', function ($routePro
 
 // Controllers
 angular.module('ReykjavikHarbour').controller('HomeController', ['$scope', function ($scope) {
-    // $scope.Title = "Reykjavik Harbour";
+    $scope.Title = "Reykjavik Harbour";
+
+    $scope.array = [1,2,3,4,5];
 }]);
