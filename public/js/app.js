@@ -28,5 +28,26 @@ angular.module('ReykjavikHarbour').controller('AboutController', ['$scope', func
 angular.module('ReykjavikHarbour').controller('ProductsController', ['$scope', function ($scope) {
     $scope.Title = "Reykjavik Harbour";
 
-    $scope.array = [1,2,3,4,5];
+    $scope.products = [
+        {
+            name: "Vara1",
+            info: "Info1",
+            img: "img/cover.jpg"
+        },
+        {
+            name: "Vara2",
+            info: "Info2",
+            img: "img/cover.jpg"
+        },
+        {
+            name: "Vara3",
+            info: "Info3",
+            img: "img/cover.jpg"
+        },
+        {
+            name: "Vara4",
+            info: "Info4",
+            img: "img/cover.jpg"
+        }
+    ];
 }]);
