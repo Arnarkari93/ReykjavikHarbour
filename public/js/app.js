@@ -6,6 +6,7 @@ angular.module('ReykjavikHarbour').config(['$routeProvider', function ($routePro
     $routeProvider
     .when('/home', { templateUrl: '/Views/home.html', controller: 'HomeController' })
     .when('/AboutUs', { templateUrl: '/Views/about-us.html', controller: 'AboutController' })
+    .when('/Products', { templateUrl: 'Views/products.html', controller: 'ProductsController' })
     .otherwise({
 		redirectTo: '/home'
 	});
@@ -19,6 +20,12 @@ angular.module('ReykjavikHarbour').controller('HomeController', ['$scope', funct
 }]);
 
 angular.module('ReykjavikHarbour').controller('AboutController', ['$scope', function ($scope) {
+    $scope.Title = "Reykjavik Harbour";
+
+    $scope.array = [1,2,3,4,5];
+}]);
+
+angular.module('ReykjavikHarbour').controller('ProductsController', ['$scope', function ($scope) {
     $scope.Title = "Reykjavik Harbour";
 
     $scope.array = [1,2,3,4,5];
