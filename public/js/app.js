@@ -12,7 +12,7 @@ angular.module('ReykjavikHarbour').config(['$routeProvider', function ($routePro
 	});
 }]);
 
-
+// Factories
 angular.module('ReykjavikHarbour').factory('Repo', [
 '$rootScope',
 '$http',
@@ -29,12 +29,15 @@ function ($rootScope, $http) {
 angular.module('ReykjavikHarbour').controller('HomeController', ['$scope', 'Repo', function ($scope, Repo) {
     $scope.Title = "Reykjavik Harbour";
 
+    // Get all the products for the server side (server.js)
     Repo.getProducts().success(function (products) {
-        console.log(products);
         $scope.products = products;
+
+        // Get a random product
         var index = Math.floor(Math.random() * products.length);
         $scope.selectedProduct = products[index];
 
+        // Set the background image
         $(".home").css("background-image", "url("+ $scope.selectedProduct.img + ")");
     }).error(function() {
         console.log("Failed to load products!");
@@ -50,29 +53,13 @@ angular.module('ReykjavikHarbour').controller('AboutController', ['$scope', 'Rep
 
 }]);
 
-angular.module('ReykjavikHarbour').controller('ProductsController', ['$scope', function ($scope) {
+angular.module('ReykjavikHarbour').controller('ProductsController', ['$scope', 'Repo', function ($scope, Repo) {
     $scope.Title = "Reykjavik Harbour";
 
-    $scope.products = [
-        {
-            name: "Vara1",
-            info: "Info1",
-            img: "img/cover.jpg"
-        },
-        {
-            name: "Vara2",
-            info: "Info2",
-            img: "img/cover.jpg"
-        },
-        {
-            name: "Vara3",
-            info: "Info3",
-            img: "img/cover.jpg"
-        },
-        {
-            name: "Vara4",
-            info: "Info4",
-            img: "img/cover.jpg"
-        }
-    ];
+    Repo.getProducts().success(function (products) {
+        console.log(products);
+        $scope.products = products;
+    }).error(function() {
+        console.log("Failed to load products!");
+    });
 }]);
