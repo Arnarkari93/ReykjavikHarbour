@@ -17,6 +17,33 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname, 'public/index.html');
 });
 
+app.get('/api/products', function (req, res) {
+    var products = [
+        {
+            name: "Cover",
+            info: "Info1",
+            img: "img/cover.jpg"
+        },
+        {
+            name: "Dark",
+            info: "Info2",
+            img: "img/dark.jpg"
+        },
+        {
+            name: "Green",
+            info: "Info3",
+            img: "img/green.jpg"
+        },
+        {
+            name: "tretryllir",
+            info: "Info4",
+            img: "img/tretryllir.jpg"
+        }
+    ];
+    console.log("products: " + products);
+    res.json(products);
+});
+
 
 var server = app.listen(3000, function () {
     var host = server.address().address;

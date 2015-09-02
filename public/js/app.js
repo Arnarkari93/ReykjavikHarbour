@@ -12,17 +12,42 @@ angular.module('ReykjavikHarbour').config(['$routeProvider', function ($routePro
 	});
 }]);
 
-// Controllers
-angular.module('ReykjavikHarbour').controller('HomeController', ['$scope', function ($scope) {
-    $scope.Title = "Reykjavik Harbour";
 
-    $scope.array = [1,2,3,4,5];
+angular.module('ReykjavikHarbour').factory('Repo', [
+'$rootScope',
+'$http',
+function ($rootScope, $http) {
+    var url = 'http://localhost:3000/api/';
+    return {
+        getProducts : function () {
+            return $http.get(url + 'products');
+        }
+    };
 }]);
 
-angular.module('ReykjavikHarbour').controller('AboutController', ['$scope', function ($scope) {
+// Controllers
+angular.module('ReykjavikHarbour').controller('HomeController', ['$scope', 'Repo', function ($scope, Repo) {
+    $scope.Title = "Reykjavik Harbour";
+
+    Repo.getProducts().success(function (products) {
+        console.log(products);
+        $scope.products = products;
+        var index = Math.floor(Math.random() * products.length);
+        $scope.selectedProduct = products[index];
+
+        $(".home").css("background-image", "url("+ $scope.selectedProduct.img + ")");
+    }).error(function() {
+        console.log("Failed to load products!");
+    });
+
+
+}]);
+
+angular.module('ReykjavikHarbour').controller('AboutController', ['$scope', 'Repo', function ($scope, Repo) {
     $scope.Title = "Reykjavik Harbour";
 
     $scope.array = [1,2,3,4,5];
+
 }]);
 
 angular.module('ReykjavikHarbour').controller('ProductsController', ['$scope', function ($scope) {
